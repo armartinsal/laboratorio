@@ -1,0 +1,10 @@
+.caja{
+	background-color:aqua;
+}
+.caja legend{
+	background-color: red;
+}
+.caja input[type=text]{
+	background-color: yellow;
+	border-radius: 4px;
+}
