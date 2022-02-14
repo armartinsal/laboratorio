@@ -41,17 +41,16 @@ btn_dia_semana.addEventListener("click", function () {
 form.addEventListener("submit", function (e) {
 	//que no envie el formulario al action para mostrar los mensajes
 	e.preventDefault();
-	provincia.value = ""
 	
 	if (cp.value.length == 0) {
-		const res = '<span class="texto_incorrecto">El campo Código Postal no puede estar vacío</span>';
+		const res = '<div class="texto_incorrecto">El campo Código Postal no puede estar vacío</div>';
 		document.getElementById("resultado").innerHTML = res;
 	}
 
 	else if (tiene_letras(cp.value)) {
-		const res = '<span class="texto_incorrecto">El campo Código Postal no puede contener letras</span>';
-		//alerta en el DOM(.html) sale un mensaje como error si contiene letras 
+		const res = '<div class="texto_incorrecto">El campo Código Postal no puede contener letras</div>';
 		document.getElementById("resultado").innerHTML = res;
+		//alerta en el DOM(.html) sale un mensaje como error si contiene letras 
 	}
 
 	else {
@@ -59,10 +58,16 @@ form.addEventListener("submit", function (e) {
 		const n_provincia = nombre_provincia(cp.value.substr(0, 2));
 		if (n_provincia == false) {
 			//alerta en el DOM(html) mensaje sale como error de que la provincia no existe
-			const res = '<span class="texto_incorrecto"> El Código Postal no existe</span>';
+			const res = '<div class="texto_incorrecto"> El Código Postal no existe</div>';
 			document.getElementById("resultado").innerHTML = res;
-		} else {
-			provincia.value = n_provincia
+		}
+		else if (n_provincia.toLowerCase() === provincia.value.toLowerCase()) {
+			const res = '<div class="texto_correcto"> El Código postal coincide con la provincia </div>';
+			document.getElementById("resultado").innerHTML = res;
+		}
+		else {
+			const res = '<div class="texto_incorrecto"> El Código postal no coincide con la provincia </div>';
+			document.getElementById("resultado").innerHTML = res;
 		}
 
 	}
